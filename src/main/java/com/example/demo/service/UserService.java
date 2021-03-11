@@ -15,7 +15,6 @@ public class UserService {
     private UserRepository userRepository;
     private JSONHolderClient holderClient;
 
-    // constructor
     @Autowired
     public UserService(UserRepository userRepository, JSONHolderClient holderClient) {
         this.userRepository = userRepository;
