@@ -15,15 +15,11 @@ public class UserService {
     private UserRepository userRepository;
     private JSONHolderClient holderClient;
 
-    
+    // constructor
     @Autowired
     public UserService(UserRepository userRepository, JSONHolderClient holderClient) {
         this.userRepository = userRepository;
         this.holderClient = holderClient;
-    }
-
-    public void getUser(User user){
-        this.userRepository.save(user);
     }
 
     public List<UserClient> client() {
@@ -40,5 +36,9 @@ public class UserService {
             user.setWebsite(client().get(i).getWebsite());
             this.userRepository.save(user);
         }
+    }
+
+    public List<User> getalluser() {
+        return this.userRepository.findAll();
     }
 }
