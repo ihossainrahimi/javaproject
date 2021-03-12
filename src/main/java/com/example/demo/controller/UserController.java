@@ -8,7 +8,7 @@ import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +44,11 @@ public class UserController {
     @GetMapping("/{id}")
     public Optional<User> getUserById(@PathVariable Integer id) {
         return userService.findById(id);
+    }
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable int id) {
+        this.userService.deleteById(id);
     }
 
 }
