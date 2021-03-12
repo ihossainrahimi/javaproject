@@ -9,6 +9,8 @@ import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,4 +48,17 @@ public class UserService {
     public Optional<User> findById(Integer id) {
         return userRepository.findById(id);
     }
+
+    public ResponseEntity<Void> deleteUserById(Integer id) {
+        boolean exists = userRepository.existsById(id);
+        if (!exists) {
+
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
+        userRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
 }
