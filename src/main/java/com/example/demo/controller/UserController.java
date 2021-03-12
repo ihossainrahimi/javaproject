@@ -9,6 +9,8 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,8 +51,15 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUserById(@PathVariable Integer id) {
-        userService.deleteUserById(id);
+    public ResponseEntity<Void> deleteUserById(@PathVariable Integer id) {
+        try {
+            this.userService.deleteUserById(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
 }

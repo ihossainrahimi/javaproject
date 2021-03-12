@@ -48,11 +48,7 @@ public class UserService {
     }
 
     public void deleteUserById(Integer id) {
-        boolean exists = userRepository.existsById(id);
-        if (!exists) {
-            throw new IllegalStateException("User with id " + id + " does not exists");
-        }
-        userRepository.deleteById(id);
+        this.userRepository.deleteById(id);
     }
 
 }
