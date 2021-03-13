@@ -3,7 +3,9 @@ package com.example.demo.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.client.PostClient;
 import com.example.demo.client.UserClient;
+import com.example.demo.entity.Post;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api")
 public class UserController {
 
     private UserService userService;
@@ -26,29 +28,55 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/client")
+    @GetMapping("/user/client")
     public List<UserClient> client() {
         return this.userService.client();
     }
 
-    @GetMapping("/updateclient")
+    @GetMapping("/post/client")
+    public List<PostClient> postClient() {
+        return this.userService.postClient();
+    }
+
+    @GetMapping("/user/update")
     public void updateclient() {
         this.userService.updateclient();
     }
 
-    @GetMapping("/all")
+    @GetMapping("/post/update")
+    public void updatePostClient() {
+        this.userService.updatePostClient();
+    }
+
+    @GetMapping("/user/all")
     public List<User> getalluser() {
         return this.userService.getalluser();
     }
 
-    @GetMapping("/{id}")
-    public Optional<User> getUserById(@PathVariable Integer id) {
-        return userService.findById(id);
+    @GetMapping("/post/all")
+    public List<Post> getallPosts() {
+        return userService.getallPost();
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/user/{id}")
+    public Optional<User> getUserById(@PathVariable Integer id) {
+        return userService.findUserById(id);
+    }
+
+    @GetMapping("/post/{id}")
+    public Optional<Post> getPostById(@PathVariable Integer id) {
+        return this.userService.findPostById(id);
+    }
+
+    @DeleteMapping("/user/{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable Integer id) {
         return this.userService.deleteUserById(id);
+    }
+
+    @DeleteMapping("/post/{id}")
+    public ResponseEntity<String> deletePostById(@PathVariable Integer id) {
+        return this.userService.deletePostById(id);
+
     }
 
 }
