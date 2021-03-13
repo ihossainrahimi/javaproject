@@ -15,6 +15,8 @@ public class Post {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "userId", nullable = false, columnDefinition = "VARCHAR(50)")
     private int userId;
     private String title;
     private String body;
