@@ -3,7 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.demo.client.JSONHolderClientPost;
+import com.example.demo.client.JSONHolderClient;
 import com.example.demo.client.PostClient;
 import com.example.demo.entity.Post;
 import com.example.demo.repository.PostRepository;
@@ -17,16 +17,16 @@ import org.springframework.stereotype.Service;
 public class PostService {
 
     private PostRepository postRepository;
-    private JSONHolderClientPost holderPostClient;
+    private JSONHolderClient holderClient;
 
     @Autowired
-    public PostService(PostRepository postRepository, JSONHolderClientPost holderClientPost) {
+    public PostService(PostRepository postRepository, JSONHolderClient holderClient) {
         this.postRepository = postRepository;
-        this.holderPostClient = holderClientPost;
+        this.holderClient = holderClient;
     }
 
     public List<PostClient> postClient() {
-        return this.holderPostClient.getPosts();
+        return this.holderClient.getPosts();
     }
 
     public void updatePostClient() {
