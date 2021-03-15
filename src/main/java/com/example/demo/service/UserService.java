@@ -49,15 +49,16 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public ResponseEntity<Void> deleteUserById(Integer id) {
+    public ResponseEntity<String> deleteUserById(Integer id) {
         boolean exists = userRepository.existsById(id);
         if (!exists) {
 
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Id " + id + " does not exist.\n" + "Check your id an try again. ",
+                    HttpStatus.BAD_REQUEST);
 
         }
         userRepository.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Id " + id + " succesfully deleted.", HttpStatus.OK);
 
     }
 
