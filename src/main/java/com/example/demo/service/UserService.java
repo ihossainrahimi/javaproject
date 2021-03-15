@@ -36,7 +36,7 @@ public class UserService {
 
     }
 
-    public List<UserClient> client() {
+    public List<UserClient> userClient() {
         return this.holderUserClient.getUsers();
     }
 
@@ -44,14 +44,14 @@ public class UserService {
         return this.holderPostClient.getPosts();
     }
 
-    public void updateclient() {
-        for (int i = 0; i < client().size(); i++) {
+    public void updateUserclient() {
+        for (int i = 0; i < userClient().size(); i++) {
             User user = new User();
-            user.setName(client().get(i).getName());
-            user.setUsername(client().get(i).getUsername());
-            user.setPhone(client().get(i).getPhone());
-            user.setEmail(client().get(i).getEmail());
-            user.setWebsite(client().get(i).getWebsite());
+            user.setName(userClient().get(i).getName());
+            user.setUsername(userClient().get(i).getUsername());
+            user.setPhone(userClient().get(i).getPhone());
+            user.setEmail(userClient().get(i).getEmail());
+            user.setWebsite(userClient().get(i).getWebsite());
             this.userRepository.save(user);
         }
     }
@@ -75,12 +75,23 @@ public class UserService {
         return this.postRepository.findAll();
     }
 
-    public Optional<User> findUserById(Integer id) {
-        return userRepository.findById(id);
+    public ResponseEntity<Optional<User>> findUserById(Integer id) {
+        Optional<User> user = userRepository.findById(id);
+        if (Optional.of(user) == null) {
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.of(Optional.of(user));
     }
 
-    public Optional<Post> findPostById(Integer id) {
-        return this.postRepository.findById(id);
+    public ResponseEntity<Optional<Post>> findPostById(Integer id) {
+        Optional<Post> post = postRepository.findById(id);
+        if (post == null) {
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.of(Optional.of(post));
+
     }
 
     public ResponseEntity<String> deleteUserById(Integer id) {
@@ -91,7 +102,7 @@ public class UserService {
                     HttpStatus.BAD_REQUEST);
 
         }
-        userRepository.deleteById(id);
+        this.userRepository.deleteById(id);
         return new ResponseEntity<>("User by Id " + id + " succesfully deleted.", HttpStatus.OK);
 
     }

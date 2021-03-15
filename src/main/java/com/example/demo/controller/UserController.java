@@ -29,8 +29,8 @@ public class UserController {
     }
 
     @GetMapping("/user/client")
-    public List<UserClient> client() {
-        return this.userService.client();
+    public List<UserClient> userClient() {
+        return this.userService.userClient();
     }
 
     @GetMapping("/post/client")
@@ -39,8 +39,8 @@ public class UserController {
     }
 
     @GetMapping("/user/update")
-    public void updateclient() {
-        this.userService.updateclient();
+    public void updateUserclient() {
+        this.userService.updateUserclient();
     }
 
     @GetMapping("/post/update")
@@ -55,16 +55,16 @@ public class UserController {
 
     @GetMapping("/post/all")
     public List<Post> getallPosts() {
-        return userService.getallPost();
+        return this.userService.getallPost();
     }
 
     @GetMapping("/user/{id}")
-    public Optional<User> getUserById(@PathVariable Integer id) {
-        return userService.findUserById(id);
+    public ResponseEntity<Optional<User>> getUserById(@PathVariable Integer id) {
+        return this.userService.findUserById(id);
     }
 
     @GetMapping("/post/{id}")
-    public Optional<Post> getPostById(@PathVariable Integer id) {
+    public ResponseEntity<Optional<Post>> getPostById(@PathVariable Integer id) {
         return this.userService.findPostById(id);
     }
 
