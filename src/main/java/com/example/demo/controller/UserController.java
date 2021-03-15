@@ -25,7 +25,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user/client")
     public List<UserClient> userClient() {
         return this.userService.userClient();
     }
