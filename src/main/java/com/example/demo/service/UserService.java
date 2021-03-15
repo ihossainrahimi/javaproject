@@ -75,13 +75,13 @@ public class UserService {
         return this.postRepository.findAll();
     }
 
-    public ResponseEntity<Optional<User>> findUserById(Integer id) {
+    public ResponseEntity<User> findUserById(Integer id) {
         Optional<User> user = userRepository.findById(id);
-        if (Optional.of(user) == null) {
+        if (user.isEmpty()) {
 
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.of(Optional.of(user));
+        return ResponseEntity.ok().body(user.get());
     }
 
     public ResponseEntity<Optional<Post>> findPostById(Integer id) {
