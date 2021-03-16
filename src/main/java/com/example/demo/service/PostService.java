@@ -16,10 +16,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class PostService {
 
+    @Autowired
     private PostRepository postRepository;
     private JSONHolderClient holderClient;
 
-    @Autowired
     public PostService(PostRepository postRepository, JSONHolderClient holderClient) {
         this.postRepository = postRepository;
         this.holderClient = holderClient;
@@ -47,11 +47,10 @@ public class PostService {
     public ResponseEntity<Post> findPostById(Integer id) {
         Optional<Post> post = postRepository.findById(id);
         if (post.isEmpty()) {
-
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.ok().body(post.get());
 
+        return ResponseEntity.ok().body(post.get());
     }
 
     public ResponseEntity<String> deletePostById(Integer id) {
