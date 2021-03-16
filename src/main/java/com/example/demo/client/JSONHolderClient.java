@@ -15,4 +15,10 @@ public interface JSONHolderClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/users/{userId}", produces = "application/json")
     UserClient getUserId(@PathVariable("userId") Long userId);
+
+    @RequestMapping(method = RequestMethod.GET, value = "/posts")
+    List<PostClient> getPosts();
+
+    @RequestMapping(method = RequestMethod.GET, value = "/posts/{postId}", produces = "application/json")
+    PostClient getPostById(@PathVariable("postId") Long postId);
 }
