@@ -6,6 +6,7 @@ import com.example.demo.client.PostClient;
 import com.example.demo.entity.Post;
 import com.example.demo.service.PostService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class PostController {
 
+    @Autowired
     private PostService postService;
-
-    public PostController(PostService postService) {
-        this.postService = postService;
-    }
 
     public List<PostClient> postClient() {
         return this.postService.postClient();

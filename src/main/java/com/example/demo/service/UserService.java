@@ -17,16 +17,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
-    private JSONHolderClient holderUserClient;
-
     @Autowired
-    public UserService(UserRepository userRepository, JSONHolderClient holderUserClient) {
-
-        this.userRepository = userRepository;
-        this.holderUserClient = holderUserClient;
-
-    }
+    private UserRepository userRepository;
+    @Autowired
+    private JSONHolderClient holderUserClient;
 
     public List<UserClient> userClient() {
         return this.holderUserClient.getUsers();

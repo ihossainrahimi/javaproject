@@ -18,12 +18,8 @@ public class PostService {
 
     @Autowired
     private PostRepository postRepository;
+    @Autowired
     private JSONHolderClient holderClient;
-
-    public PostService(PostRepository postRepository, JSONHolderClient holderClient) {
-        this.postRepository = postRepository;
-        this.holderClient = holderClient;
-    }
 
     public List<PostClient> postClient() {
         return this.holderClient.getPosts();
