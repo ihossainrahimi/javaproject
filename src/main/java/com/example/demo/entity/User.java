@@ -14,20 +14,10 @@ public class User {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(columnDefinition = "VARCHAR(50)")
     private String name;
-
-    @Column(columnDefinition = "VARCHAR(50)")
     private String username;
-
-    @Column(columnDefinition = "VARCHAR(70)")
     private String email;
-
-    @Column(columnDefinition = "VARCHAR(50)")
     private String phone;
-
-    @Column(columnDefinition = "VARCHAR(70)")
     private String website;
 
     public Integer getId() {
