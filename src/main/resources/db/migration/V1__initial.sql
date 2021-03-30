@@ -3,7 +3,7 @@ CREATE TABLE users (
     name character varying(20) NOT NULL,
     username character varying(20) NOT NULL,
     email character varying(50) NOT NULL,
-    phone  character varying(20) NOT NULL,
+    phone  character varying(30) NOT NULL,
     website character varying(255)
 );
 
