@@ -1,7 +1,16 @@
 package com.example.demo.client;
 
+import java.util.List;
+
+import com.example.demo.entity.Post;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class UserClient {
 
+    @Autowired
+    private List<Post> postClient;
+   
     private Integer id;
 
     private String name;
@@ -60,6 +69,10 @@ public class UserClient {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public List<Post> getPosts() {
+        return this.postClient;
     }
 
 }
