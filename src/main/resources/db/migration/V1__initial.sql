@@ -9,7 +9,7 @@ CREATE TABLE users (
 
 CREATE TABLE posts(
     id serial NOT NULL PRIMARY KEY ,
-    userId INT NOT NULL,
+    userid INTEGER NOT NULL,
     title character varying(255),
     body character varying(255)
 );
