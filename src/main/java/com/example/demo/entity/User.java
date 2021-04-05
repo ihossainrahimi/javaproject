@@ -2,23 +2,29 @@ package com.example.demo.entity;
 
 import javax.persistence.Table;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.ToString;
 
-import javax.persistence.CascadeType;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 
+
+@ToString
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String username;
@@ -27,13 +33,17 @@ public class User {
     private String website;
 
     @OneToMany(
+        fetch = FetchType.EAGER,
         mappedBy = "user",
-        cascade = CascadeType.ALL
+        targetEntity = Post.class
     )
-    private List<Post> post = new ArrayList<>();
+    private Set<Post> posts = new HashSet<>();
 
-    public void setPost(List<Post> post){
-        this.post = post;
+    public Set<Post> getPosts() {
+        return posts;
+    }
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
 
     public Integer getId() {
