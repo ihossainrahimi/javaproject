@@ -21,6 +21,10 @@ public class PostService {
     @Autowired
     private JSONHolderClient holderClient;
 
+    public Post addPost(Post posts){
+       return postRepository.save(posts);
+    }
+    
     public List<PostClient> postClient() {
         return this.holderClient.getPosts();
     }
