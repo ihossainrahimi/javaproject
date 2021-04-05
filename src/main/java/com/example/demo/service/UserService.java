@@ -22,6 +22,11 @@ public class UserService {
     @Autowired
     private JSONHolderClient holderUserClient;
 
+    public User addUser(User users){
+        return this.userRepository.save(users);
+    }
+
+
     public List<UserClient> userClient() {
         return this.holderUserClient.getUsers();
     }
@@ -34,7 +39,6 @@ public class UserService {
             user.setPhone(userClient().get(i).getPhone());
             user.setEmail(userClient().get(i).getEmail());
             user.setWebsite(userClient().get(i).getWebsite());
-            user.setPost(userClient().get(i).getPosts());
             this.userRepository.save(user);
         }
     }
