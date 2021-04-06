@@ -25,6 +25,11 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @PostMapping("/post/")
+    public Post addPost(@RequestBody Post post){
+        return this.postService.addPost(post);
+    }
+
     public List<PostClient> postClient() {
         return this.postService.postClient();
     }

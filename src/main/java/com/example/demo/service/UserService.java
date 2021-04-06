@@ -23,6 +23,11 @@ public class UserService {
     @Autowired
     private JSONHolderClient holderUserClient;
 
+    public User addUser(User users){
+        return this.userRepository.save(users);
+    }
+
+
     public List<UserClient> userClient() {
         return this.holderUserClient.getUsers();
     }

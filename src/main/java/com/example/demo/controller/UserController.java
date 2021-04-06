@@ -27,6 +27,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @PostMapping("/user/")
+    public User addUser(@RequestBody User user){
+        return this.userService.addUser(user);
+    }
+
     public List<UserClient> userClient() {
         return this.userService.userClient();
     }
