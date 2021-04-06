@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.example.demo.client.JSONHolderClient;
 
 import com.example.demo.client.UserClient;
+import com.example.demo.dto.UpdateUserRequestBody;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 
@@ -67,6 +68,25 @@ public class UserService {
         this.userRepository.deleteById(id);
         return new ResponseEntity<>("User by Id " + id + " succesfully deleted.", HttpStatus.OK);
 
+    }
+
+    public ResponseEntity<User> updateUser(int id, UpdateUserRequestBody updateRequestBody) {
+
+        Optional<User> user = userRepository.findById(id);
+        if(user.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        user.get().setName(updateRequestBody.getName());
+        user.get().setUsername(updateRequestBody.getUsername());
+        user.get().setEmail(updateRequestBody.getEmail());
+        user.get().setPhone(updateRequestBody.getPhone());
+        user.get().setWebsite(updateRequestBody.getWebsite());
+        this.userRepository.save(user.get());
+        return ResponseEntity.ok().body(user.get());
+    }
+
+    public User addUser(User users) {
+        return this.userRepository.save(users);
     }
 
 }

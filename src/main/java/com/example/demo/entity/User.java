@@ -2,46 +2,46 @@ package com.example.demo.entity;
 
 import javax.persistence.Table;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.ToString;
 
-import javax.persistence.CascadeType;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+@ToString
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String name;
     private String username;
     private String email;
     private String phone;
     private String website;
 
-    @OneToMany(
-        mappedBy = "user",
-        cascade = CascadeType.ALL
-    )
-    private List<Post> post = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", targetEntity = Post.class)
+    private Set<Post> posts = new HashSet<>();
 
-    public void setPost(List<Post> post){
-        this.post = post;
+    public Set<Post> getPosts() {
+        return posts;
     }
 
-    public Integer getId() {
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
+    }
+
+    public int getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -82,6 +82,10 @@ public class User {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }
