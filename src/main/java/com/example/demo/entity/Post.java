@@ -26,7 +26,7 @@ public class Post {
     private int id;
 
     @Column(name = "user_id")
-    private Integer userId;
+    private int userId;
     private String title;
     private String body;
 

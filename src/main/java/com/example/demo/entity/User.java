@@ -15,7 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
 @ToString
 @Entity
 @Table(name = "users")
@@ -23,33 +22,26 @@ public class User {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
     private String name;
     private String username;
     private String email;
     private String phone;
     private String website;
 
-    @OneToMany(
-        fetch = FetchType.EAGER,
-        mappedBy = "user",
-        targetEntity = Post.class
-    )
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", targetEntity = Post.class)
     private Set<Post> posts = new HashSet<>();
 
     public Set<Post> getPosts() {
         return posts;
     }
+
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -90,6 +82,10 @@ public class User {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }
