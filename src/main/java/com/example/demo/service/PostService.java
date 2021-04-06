@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.example.demo.client.JSONHolderClient;
 import com.example.demo.client.PostClient;
+import com.example.demo.dto.UpdatePostRequestBody;
 import com.example.demo.entity.Post;
 import com.example.demo.repository.PostRepository;
 
@@ -60,5 +61,24 @@ public class PostService {
         return new ResponseEntity<>("Post by Id " + id + " succesfully deleted.", HttpStatus.OK);
 
     }
+
+    public ResponseEntity<Post> updatePost(int id, UpdatePostRequestBody postRequestBody) {
+        Optional<Post> post = postRepository.findById(id);
+        if (post.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        post.get().setUserId(postRequestBody.getUserId());
+        post.get().setTitle(postRequestBody.getTitle());
+        post.get().setBody(postRequestBody.getBody());
+        this.postRepository.save(post.get());
+        return ResponseEntity.ok().body(post.get());
+
+    }
+
+    public Post addPost(Post posts) {
+        return postRepository.save(posts);
+    }
+
 
 }

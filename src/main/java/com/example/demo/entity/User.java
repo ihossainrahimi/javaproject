@@ -1,41 +1,47 @@
 package com.example.demo.entity;
 
 import javax.persistence.Table;
+
+import lombok.ToString;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@ToString
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(columnDefinition = "VARCHAR(50)")
+    private int id;
     private String name;
-
-    @Column(columnDefinition = "VARCHAR(50)")
     private String username;
-
-    @Column(columnDefinition = "VARCHAR(70)")
     private String email;
-
-    @Column(columnDefinition = "VARCHAR(50)")
     private String phone;
-
-    @Column(columnDefinition = "VARCHAR(70)")
     private String website;
 
-    public Integer getId() {
-        return id;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", targetEntity = Post.class)
+    private Set<Post> posts = new HashSet<>();
+
+    public Set<Post> getPosts() {
+        return posts;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -76,6 +82,10 @@ public class User {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

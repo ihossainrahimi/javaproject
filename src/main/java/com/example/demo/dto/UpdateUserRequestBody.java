@@ -1,35 +1,11 @@
-package com.example.demo.client;
+package com.example.demo.dto;
 
-import java.util.List;
-
-import com.example.demo.entity.Post;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-public class UserClient {
-
-    @Autowired
-    private List<Post> postClient;
-   
-    private Integer id;
-
+public class UpdateUserRequestBody {
     private String name;
-
     private String username;
-
     private String email;
-
     private String phone;
-
     private String website;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -70,9 +46,5 @@ public class UserClient {
     public void setWebsite(String website) {
         this.website = website;
     }
-
-    public List<Post> getPosts() {
-        return this.postClient;
-    }
-
+    
 }
