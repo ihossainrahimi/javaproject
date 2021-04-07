@@ -29,11 +29,6 @@ public class User {
     private String phone;
     private String website;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", targetEntity = Post.class)
-    private Set<Post> posts = new HashSet<>();
-
-    public Set<Post> getPosts() {
-        return posts;
     }
 
     public void setPosts(Set<Post> posts) {
