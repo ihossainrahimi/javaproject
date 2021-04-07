@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+
 import com.example.demo.client.UserClient;
 import com.example.demo.dto.UpdateUserRequestBody;
 import com.example.demo.entity.User;
@@ -22,8 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class UserController {
 
-
-
     @Autowired
     private UserService userService;
 
@@ -43,7 +42,7 @@ public class UserController {
 
     @GetMapping("/user/all")
     public List<User> getalluser() {
-        return this.userService.getalluser();
+        return this.userService.getAllUser();
     }
 
     @GetMapping("/user/{id}")
@@ -55,15 +54,9 @@ public class UserController {
     public ResponseEntity<String> deleteUserById(@PathVariable Integer id) {
         return this.userService.deleteUserById(id);
     }
-
-    @PostMapping("/user/")
-    public User addUser(@RequestBody User user) {
-        return this.userService.addUser(user);
-    }
-
+    
     @PutMapping("/user/{id}")
     public void updateUser(@RequestBody UpdateUserRequestBody user, @PathVariable int id) {
         this.userService.updateUser(id, user);
     }
-
 }

@@ -2,14 +2,18 @@ package com.example.demo.entity;
 
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
+import lombok.Data;
 import lombok.ToString;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +21,11 @@ import javax.persistence.OneToMany;
 
 @ToString
 @Entity
+@Data
 @Table(name = "users")
+@SQLDelete(sql = "UPDATE users SET deleted= true WHERE id=?")
+@Where(clause = "deleted = false")
+
 public class User {
     @Id
     @Column(name = "id", nullable = false)
@@ -28,11 +36,17 @@ public class User {
     private String email;
     private String phone;
     private String website;
+    private boolean deleted;
 
-    }
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Post> posts = new HashSet<>();
 
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
+    }
+
+    public Set<Post> getPosts() {
+        return posts;
     }
 
     public int getId() {
@@ -82,5 +96,14 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
 
 }

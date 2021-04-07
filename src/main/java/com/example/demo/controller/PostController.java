@@ -55,11 +55,6 @@ public class PostController {
 
     }
 
-    @PostMapping("/post/")
-    public Post addPost(@RequestBody Post post) {
-        return this.postService.addPost(post);
-    }
-
     @PutMapping("/post/{id}")
     public ResponseEntity<Post> updatePost(@RequestBody UpdatePostRequestBody postRequestBody, @PathVariable Integer id) {
         return this.postService.updatePost(id, postRequestBody);

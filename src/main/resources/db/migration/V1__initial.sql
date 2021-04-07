@@ -4,7 +4,8 @@ CREATE TABLE users (
     username character varying(20) NOT NULL,
     email character varying(50) NOT NULL,
     phone  character varying(30) NOT NULL,
-    website character varying(255)
+    website character varying(255),
+    deleted boolean NOT NULL
 );
 
 CREATE TABLE posts(
@@ -12,6 +13,7 @@ CREATE TABLE posts(
     user_id INTEGER NOT NULL,
     title character varying(255),
     body character varying(255),
+    deleted boolean NOT NULL,
     CONSTRAINT fk_user
       FOREIGN KEY(user_id) 
 	  REFERENCES users(id)

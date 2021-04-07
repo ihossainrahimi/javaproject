@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,12 +14,16 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.ToString;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
+import lombok.ToString;
 
 @ToString
 @Entity
 @Table(name = "posts")
+@SQLDelete(sql = "UPDATE posts SET deleted= true WHERE id=?")
+@Where(clause = "deleted = false")
 public class Post {
 
     @Id
@@ -29,6 +35,7 @@ public class Post {
     private int userId;
     private String title;
     private String body;
+    private boolean deleted;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
@@ -38,6 +45,7 @@ public class Post {
     public User getUser() {
         return user;
     }
+
     public void setUser(User user) {
         this.user = user;
     }
@@ -74,4 +82,11 @@ public class Post {
         this.body = body;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }
