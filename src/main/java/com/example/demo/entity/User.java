@@ -29,10 +29,10 @@ public class User {
     @OneToMany(
         mappedBy = "user",
         cascade = CascadeType.ALL
-    )
+        )
     private List<Post> post = new ArrayList<>();
 
-    public void setPost(List<Post> post){
+    public void setPost(List<Post> post) {
         this.post = post;
     }
 
