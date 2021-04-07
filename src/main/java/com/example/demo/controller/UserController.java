@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import com.example.demo.client.UserClient;
+import com.example.demo.dto.UpdateUserRequestBody;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class UserController {
+
+
 
     @Autowired
     private UserService userService;
@@ -32,7 +36,7 @@ public class UserController {
         return this.userService.userClient();
     }
 
-    @GetMapping("/user/update")
+    @GetMapping("/user/get")
     public void updateUserclient() {
         this.userService.updateUserclient();
     }
@@ -50,6 +54,16 @@ public class UserController {
     @DeleteMapping("/user/{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable Integer id) {
         return this.userService.deleteUserById(id);
+    }
+
+    @PostMapping("/user/")
+    public User addUser(@RequestBody User user) {
+        return this.userService.addUser(user);
+    }
+
+    @PutMapping("/user/{id}")
+    public void updateUser(@RequestBody UpdateUserRequestBody user, @PathVariable int id) {
+        this.userService.updateUser(id, user);
     }
 
 }

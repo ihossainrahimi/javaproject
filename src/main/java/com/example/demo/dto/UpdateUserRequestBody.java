@@ -1,43 +1,11 @@
-package com.example.demo.entity;
+package com.example.demo.dto;
 
-import javax.persistence.Table;
-
-import lombok.ToString;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-@ToString
-@Entity
-@Table(name = "users")
-public class User {
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class UpdateUserRequestBody {
     private String name;
     private String username;
     private String email;
     private String phone;
     private String website;
-
-    }
-
-    public void setPosts(Set<Post> posts) {
-        this.posts = posts;
-    }
-
-    public int getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
@@ -78,9 +46,5 @@ public class User {
     public void setWebsite(String website) {
         this.website = website;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    
 }
