@@ -3,13 +3,12 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.demo.client.JSONHolderClient;
 
+import com.example.demo.client.JSONHolderClient;
 import com.example.demo.client.UserClient;
 import com.example.demo.dto.UpdateUserRequestBody;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +22,9 @@ public class UserService {
     @Autowired
     private JSONHolderClient holderUserClient;
 
-    public User addUser(User users){
-        return this.userRepository.save(users);
+    public User addUser(User user) {
+        return this.userRepository.save(user);
     }
-
 
     public List<UserClient> userClient() {
         return this.holderUserClient.getUsers();
@@ -44,7 +42,7 @@ public class UserService {
         }
     }
 
-    public List<User> getalluser() {
+    public List<User> getAllUser(){
         return this.userRepository.findAll();
     }
 
@@ -73,7 +71,7 @@ public class UserService {
     public ResponseEntity<User> updateUser(int id, UpdateUserRequestBody updateRequestBody) {
 
         Optional<User> user = userRepository.findById(id);
-        if(user.isEmpty()){
+        if (user.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         user.get().setName(updateRequestBody.getName());
@@ -83,10 +81,6 @@ public class UserService {
         user.get().setWebsite(updateRequestBody.getWebsite());
         this.userRepository.save(user.get());
         return ResponseEntity.ok().body(user.get());
-    }
-
-    public User addUser(User users) {
-        return this.userRepository.save(users);
     }
 
 }

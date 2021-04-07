@@ -80,9 +80,4 @@ public class PostService {
 
     }
 
-    public Post addPost(Post posts) {
-        return postRepository.save(posts);
-    }
-
-
 }

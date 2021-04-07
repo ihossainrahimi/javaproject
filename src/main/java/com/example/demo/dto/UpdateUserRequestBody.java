@@ -6,6 +6,7 @@ public class UpdateUserRequestBody {
     private String email;
     private String phone;
     private String website;
+    private boolean deleted;
 
     public String getName() {
         return name;
@@ -46,5 +47,12 @@ public class UpdateUserRequestBody {
     public void setWebsite(String website) {
         this.website = website;
     }
-    
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }
