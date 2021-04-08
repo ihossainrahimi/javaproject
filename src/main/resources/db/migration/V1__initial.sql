@@ -5,7 +5,8 @@ CREATE TABLE users (
     email character varying(50) NOT NULL,
     phone  character varying(30) NOT NULL,
     website character varying(255),
-    deleted boolean NOT NULL
+    deleted boolean NOT NULL,
+    info JSONB NOT NULL
 );
 
 CREATE TABLE posts(

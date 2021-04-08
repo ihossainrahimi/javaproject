@@ -2,7 +2,11 @@ package com.example.demo.entity;
 
 import javax.persistence.Table;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.Where;
 
 import lombok.Data;
@@ -25,7 +29,10 @@ import javax.persistence.OneToMany;
 @Table(name = "users")
 @SQLDelete(sql = "UPDATE users SET deleted= true WHERE id=?")
 @Where(clause = "deleted = false")
-
+@TypeDef(
+    name = "jsonb",
+    typeClass = JsonBinaryType.class
+)
 public class User {
     @Id
     @Column(name = "id", nullable = false)
@@ -37,6 +44,9 @@ public class User {
     private String phone;
     private String website;
     private boolean deleted;
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
+    private String info;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Post> posts = new HashSet<>();
@@ -105,5 +115,12 @@ public class User {
         return deleted;
     }
 
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
 
 }

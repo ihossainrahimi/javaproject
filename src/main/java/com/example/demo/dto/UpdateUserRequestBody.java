@@ -1,5 +1,16 @@
 package com.example.demo.dto;
 
+import javax.persistence.Column;
+
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+@TypeDef(
+    name = "jsonb",
+    typeClass = JsonBinaryType.class
+)
 public class UpdateUserRequestBody {
     private String name;
     private String username;
@@ -7,6 +18,9 @@ public class UpdateUserRequestBody {
     private String phone;
     private String website;
     private boolean deleted;
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
+    private String info;
 
     public String getName() {
         return name;
@@ -55,4 +69,13 @@ public class UpdateUserRequestBody {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
 }
