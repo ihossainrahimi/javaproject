@@ -49,6 +49,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Post> posts = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Address> addresses = new HashSet<>();
+
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
     }
@@ -120,5 +123,5 @@ public class User {
     public void setInfo(HashMap<String, String> info) {
         this.info = info;
     }
-    
+
 }

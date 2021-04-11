@@ -16,3 +16,15 @@ CREATE TABLE posts(
     deleted boolean NOT NULL,
     CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE TABLE addresses(
+    id INTEGER PRIMARY KEY NOT NULL,
+    user_id INTEGER NOT NULL,
+    street character varying(30),
+    suite character varying(30),
+    complete_address character varying(200) NOT NULL,
+    lat FLOAT NOT NULL,
+    log FLOAT NOT NULL,
+    deleted boolean NOT NULL,
+    CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
