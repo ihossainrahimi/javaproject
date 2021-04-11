@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-
 import com.example.demo.client.UserClient;
 import com.example.demo.dto.UpdateUserRequestBody;
 import com.example.demo.entity.User;
@@ -27,7 +26,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/user/")
-    public User addUser(@RequestBody User user){
+    public User addUser(@RequestBody User user) {
         return this.userService.addUser(user);
     }
 
@@ -54,9 +53,10 @@ public class UserController {
     public ResponseEntity<String> deleteUserById(@PathVariable Integer id) {
         return this.userService.deleteUserById(id);
     }
-    
+
     @PutMapping("/user/{id}")
     public void updateUser(@RequestBody UpdateUserRequestBody user, @PathVariable int id) {
         this.userService.updateUser(id, user);
     }
+    
 }

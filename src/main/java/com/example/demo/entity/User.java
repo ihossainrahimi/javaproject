@@ -12,6 +12,7 @@ import org.hibernate.annotations.Where;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,10 +30,7 @@ import javax.persistence.OneToMany;
 @Table(name = "users")
 @SQLDelete(sql = "UPDATE users SET deleted= true WHERE id=?")
 @Where(clause = "deleted = false")
-@TypeDef(
-    name = "jsonb",
-    typeClass = JsonBinaryType.class
-)
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class User {
     @Id
     @Column(name = "id", nullable = false)
@@ -45,8 +43,8 @@ public class User {
     private String website;
     private boolean deleted;
     @Type(type = "jsonb")
-    @Column(columnDefinition = "jsonb")
-    private String info;
+    @Column(columnDefinition = "hashmap")
+    private HashMap<String, String> info = new HashMap<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Post> posts = new HashSet<>();
@@ -115,12 +113,12 @@ public class User {
         return deleted;
     }
 
-    public String getInfo() {
+    public HashMap<String, String> getInfo() {
         return info;
     }
 
-    public void setInfo(String info) {
+    public void setInfo(HashMap<String, String> info) {
         this.info = info;
     }
-
+    
 }

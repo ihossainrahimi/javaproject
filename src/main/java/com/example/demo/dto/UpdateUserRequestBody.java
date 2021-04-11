@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import java.util.HashMap;
+
 import javax.persistence.Column;
 
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
@@ -7,10 +9,7 @@ import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
-@TypeDef(
-    name = "jsonb",
-    typeClass = JsonBinaryType.class
-)
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class UpdateUserRequestBody {
     private String name;
     private String username;
@@ -19,8 +18,8 @@ public class UpdateUserRequestBody {
     private String website;
     private boolean deleted;
     @Type(type = "jsonb")
-    @Column(columnDefinition = "jsonb")
-    private String info;
+    @Column(columnDefinition = "hashmap")
+    private HashMap<String, String> info = new HashMap<>();
 
     public String getName() {
         return name;
@@ -70,12 +69,11 @@ public class UpdateUserRequestBody {
         this.deleted = deleted;
     }
 
-    public String getInfo() {
+    public HashMap<String, String> getInfo() {
         return info;
     }
 
-    public void setInfo(String info) {
+    public void setInfo(HashMap<String, String> info) {
         this.info = info;
     }
-
 }

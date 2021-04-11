@@ -2,8 +2,6 @@ package com.example.demo.service;
 
 import java.util.List;
 import java.util.Optional;
-
-
 import com.example.demo.client.JSONHolderClient;
 import com.example.demo.client.UserClient;
 import com.example.demo.dto.UpdateUserRequestBody;
@@ -24,6 +22,7 @@ public class UserService {
 
     public User addUser(User user) {
         return this.userRepository.save(user);
+
     }
 
     public List<UserClient> userClient() {
@@ -42,7 +41,7 @@ public class UserService {
         }
     }
 
-    public List<User> getAllUser(){
+    public List<User> getAllUser() {
         return this.userRepository.findAll();
     }
 
