@@ -21,7 +21,7 @@ CREATE TABLE countries(
     name character varying(50) NOT NULL
 );
 CREATE TABLE provinces(
-    id INTEGER PRIMARY KEY NOT NULL,
+    id serial PRIMARY KEY NOT NULL,
     country_id INTEGER NOT NULL,
     name character varying(50) NOT NULL,
     CONSTRAINT fk_country FOREIGN KEY(country_id) REFERENCES countries(id) ON DELETE CASCADE ON UPDATE CASCADE
