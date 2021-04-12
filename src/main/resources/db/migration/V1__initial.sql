@@ -16,22 +16,28 @@ CREATE TABLE posts(
     deleted boolean NOT NULL,
     CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 CREATE TABLE countries(
     id serial PRIMARY KEY NOT NULL,
     name character varying(50) NOT NULL
 );
-
+CREATE TABLE provinces(
+    id INTEGER PRIMARY KEY NOT NULL,
+    country_id INTEGER NOT NULL,
+    name character varying(50) NOT NULL,
+    CONSTRAINT fk_country FOREIGN KEY(country_id) REFERENCES countries(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
 CREATE TABLE addresses(
     id serial PRIMARY KEY NOT NULL,
     user_id INTEGER NOT NULL,
     country_id INTEGER NOT NULL,
+    province_id INTEGER NOT NULL,
     street character varying(30),
     suite character varying(30),
     complete_address character varying(200) NOT NULL,
     lat FLOAT NOT NULL,
     log FLOAT NOT NULL,
     deleted boolean NOT NULL,
+    CONSTRAINT fk_province FOREIGN KEY(province_id) REFERENCES provinces(id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_country FOREIGN KEY(country_id) REFERENCES countries(id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );

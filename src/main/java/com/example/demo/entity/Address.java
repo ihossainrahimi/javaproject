@@ -29,6 +29,8 @@ public class Address {
     private int userId;
     @Column(name = "country_id")
     private int countryId;
+    @Column(name = "province_id")
+    private int provinceId;
     private String street;
     private String suite;
     @Column(name = "complete_address")
@@ -46,6 +48,11 @@ public class Address {
     @JoinColumn(name = "country_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
     private Country country;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "province_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonIgnore
+    private Province province;
 
     public int getId() {
         return id;
@@ -133,6 +140,22 @@ public class Address {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public int getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(int provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
     }
 
 }

@@ -24,6 +24,9 @@ public class Country {
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
     private Set<Address> addresses = new HashSet<>();
 
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    private Set<Province> provinces = new HashSet<>();
+
     public int getId() {
         return id;
     }
@@ -38,6 +41,14 @@ public class Country {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setProvinces(Set<Province> provinces) {
+        this.provinces = provinces;
+    }
+
+    public Set<Province> getProvinces() {
+        return provinces;
     }
 
 }
