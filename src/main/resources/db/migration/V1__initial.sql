@@ -18,7 +18,7 @@ CREATE TABLE posts(
 );
 
 CREATE TABLE countries(
-    id INTEGER PRIMARY KEY NOT NULL,
+    id serial PRIMARY KEY NOT NULL,
     name character varying(50) NOT NULL
 );
 

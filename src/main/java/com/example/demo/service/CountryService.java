@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.dto.UpdateCountryRequestBody;
 import com.example.demo.entity.Country;
 import com.example.demo.repository.CountryRepository;
 
@@ -39,6 +40,15 @@ public class CountryService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Country by Id "+id+" not found.");
         }
         return ResponseEntity.status(HttpStatus.OK).body("Country by id "+id+" deleted.");
+    }
+
+    public ResponseEntity<Country> updateCountry(int id, UpdateCountryRequestBody countryRequestBody){
+        Optional<Country> country = this.countryRepository.findById(id);
+        if(country.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        country.get().setName(countryRequestBody.getName());
+        return ResponseEntity.ok().body(country.get());
     }
 
 }
