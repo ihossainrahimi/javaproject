@@ -17,28 +17,25 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Table(name = "provinces")
+@Table(name = "cities")
 @Entity
-public class Province {
-
+public class City {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "province_id")
+    private int provinceId;
     private String name;
-    @Column(name = "country_id")
-    private int countryId;
 
-    @OneToMany(mappedBy = "province", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     private Set<Address> addresses = new HashSet<>();
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "province_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
-    private Country country;
+    private Province province;
 
-    @OneToMany(mappedBy = "province", cascade = CascadeType.ALL)
-    private Set<City> cities = new HashSet<>();
 
     public int getId() {
         return id;
@@ -56,27 +53,19 @@ public class Province {
         this.name = name;
     }
 
-    public int getCountryId() {
-        return countryId;
+    public int getProvinceId() {
+        return provinceId;
     }
 
-    public void setCountryId(int countryId) {
-        this.countryId = countryId;
+    public void setProvinceId(int provinceId) {
+        this.provinceId = provinceId;
     }
 
-    public Country getCountry() {
-        return country;
+    public Province getProvince() {
+        return province;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public void setCities(Set<City> cities) {
-        this.cities = cities;
-    }
-
-    public Set<City> getCities() {
-        return cities;
+    public void setProvince(Province province) {
+        this.province = province;
     }
 }

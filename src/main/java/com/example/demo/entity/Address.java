@@ -31,6 +31,8 @@ public class Address {
     private int countryId;
     @Column(name = "province_id")
     private int provinceId;
+    @Column(name = "city_id")
+    private int cityId;
     private String street;
     private String suite;
     @Column(name = "complete_address")
@@ -53,6 +55,11 @@ public class Address {
     @JoinColumn(name = "province_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
     private Province province;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonIgnore
+    private City city;
 
     public int getId() {
         return id;
