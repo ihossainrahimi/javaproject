@@ -48,7 +48,9 @@ public class ProvinceService {
         if (province.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+        province.get().setCountryId(provinceRequestBody.getCountryId());
         province.get().setName(provinceRequestBody.getName());
+        this.provinceRepository.save(province.get());
         return ResponseEntity.ok().body(province.get());
     }
 }

@@ -31,7 +31,6 @@ public class CountryService {
         if(country.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        this.countryRepository.deleteById(id);
         return ResponseEntity.ok().body(country.get());
     }
 
@@ -40,15 +39,17 @@ public class CountryService {
         if(!exist){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Country by Id "+id+" not found.");
         }
+        this.countryRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("Country by id "+id+" deleted.");
     }
 
     public ResponseEntity<Country> updateCountry(int id, UpdateCountryRequestBody countryRequestBody){
-        Optional<Country> country = this.countryRepository.findById(id);
+        Optional<Country> country = countryRepository.findById(id);
         if(country.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         country.get().setName(countryRequestBody.getName());
+        this.countryRepository.save(country.get());
         return ResponseEntity.ok().body(country.get());
     }
 

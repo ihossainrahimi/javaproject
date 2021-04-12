@@ -165,4 +165,19 @@ public class Address {
         this.province = province;
     }
 
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
 }

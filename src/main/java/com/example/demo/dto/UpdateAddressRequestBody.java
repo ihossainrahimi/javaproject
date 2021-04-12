@@ -4,6 +4,9 @@ public class UpdateAddressRequestBody {
 
     private int id;
     private int userId;
+    private int countryId;
+    private int provinceId;
+    private int cityId;
     private String street;
     private String suite;
     private String completeAddress;
@@ -73,6 +76,30 @@ public class UpdateAddressRequestBody {
 
     public void setSuite(String suite) {
         this.suite = suite;
+    }
+
+    public int getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
+    }
+
+    public int getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(int provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
 }

@@ -54,6 +54,9 @@ public class AddressService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         address.get().setUserId(addressRequestBody.getUserId());
+        address.get().setCountryId(addressRequestBody.getCountryId());
+        address.get().setProvinceId(addressRequestBody.getProvinceId());
+        address.get().setCityId(addressRequestBody.getCityId());
         address.get().setStreet(addressRequestBody.getStreet());
         address.get().setSuite(addressRequestBody.getSuite());
         address.get().setLat(addressRequestBody.getLat());
