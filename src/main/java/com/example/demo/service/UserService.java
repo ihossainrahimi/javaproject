@@ -78,7 +78,6 @@ public class UserService {
         user.get().setEmail(updateRequestBody.getEmail());
         user.get().setPhone(updateRequestBody.getPhone());
         user.get().setWebsite(updateRequestBody.getWebsite());
-        user.get().setDeleted(updateRequestBody.isDeleted());
         user.get().setInfo(updateRequestBody.getInfo());
         this.userRepository.save(user.get());
         return ResponseEntity.ok().body(user.get());

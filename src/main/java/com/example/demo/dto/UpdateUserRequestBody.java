@@ -16,7 +16,6 @@ public class UpdateUserRequestBody {
     private String email;
     private String phone;
     private String website;
-    private boolean deleted;
     @Type(type = "jsonb")
     @Column(columnDefinition = "hashmap")
     private HashMap<String, String> info = new HashMap<>();
@@ -59,14 +58,6 @@ public class UpdateUserRequestBody {
 
     public void setWebsite(String website) {
         this.website = website;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
     }
 
     public HashMap<String, String> getInfo() {

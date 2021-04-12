@@ -12,7 +12,6 @@ public class UpdateAddressRequestBody {
     private String completeAddress;
     private float lat;
     private float log;
-    private boolean deleted;
 
     public int getId() {
         return id;
@@ -52,14 +51,6 @@ public class UpdateAddressRequestBody {
 
     public void setLog(float log) {
         this.log = log;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
     }
 
     public int getUserId() {

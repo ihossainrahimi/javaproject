@@ -1,6 +1,7 @@
 package com.example.demo.dto;
 
 public class UpdatePostRequestBody {
+    
     private Integer userId;
     private String title;
     private String body;
