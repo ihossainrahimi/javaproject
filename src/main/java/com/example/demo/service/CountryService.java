@@ -31,6 +31,7 @@ public class CountryService {
         if(country.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+        this.countryRepository.deleteById(id);
         return ResponseEntity.ok().body(country.get());
     }
 
