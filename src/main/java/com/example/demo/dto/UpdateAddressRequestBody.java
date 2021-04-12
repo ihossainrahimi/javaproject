@@ -1,44 +1,15 @@
-package com.example.demo.entity;
+package com.example.demo.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+public class UpdateAddressRequestBody {
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-
-@Table(name = "addresses")
-@Entity
-@SQLDelete(sql = "UPDATE addresses SET deleted= true WHERE id=?")
-@Where(clause = "deleted = false")
-public class Address {
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(name = "user_id")
     private int userId;
     private String street;
     private String suite;
-    @Column(name = "complete_address")
     private String completeAddress;
     private float lat;
     private float log;
     private boolean deleted;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @JsonIgnore
-    private User user;
 
     public int getId() {
         return id;
@@ -78,14 +49,6 @@ public class Address {
 
     public void setLog(float log) {
         this.log = log;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public boolean isDeleted() {

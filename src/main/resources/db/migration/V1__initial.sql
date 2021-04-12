@@ -18,7 +18,7 @@ CREATE TABLE posts(
 );
 
 CREATE TABLE addresses(
-    id INTEGER PRIMARY KEY NOT NULL,
+    id serial PRIMARY KEY NOT NULL,
     user_id INTEGER NOT NULL,
     street character varying(30),
     suite character varying(30),

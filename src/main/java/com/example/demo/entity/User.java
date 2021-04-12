@@ -124,4 +124,12 @@ public class User {
         this.info = info;
     }
 
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
 }
