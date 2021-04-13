@@ -33,10 +33,6 @@ public class PostController {
         this.postService.addPost(postRequestBody);
     }
 
-    public List<PostClient> postClient() {
-        return this.postService.postClient();
-    }
-
     @GetMapping("/post/update")
     public void updatePostClient() {
         this.postService.updatePostClient();
