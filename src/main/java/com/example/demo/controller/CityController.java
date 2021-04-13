@@ -1,12 +1,12 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
+import com.example.demo.dto.StoreCityRequestBody;
 import com.example.demo.dto.UpdateCityRequestBody;
 import com.example.demo.entity.City;
 import com.example.demo.service.CityService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,13 +26,13 @@ public class CityController {
     private CityService cityService;
 
     @PostMapping("/city/")
-    public void addCity(@RequestBody City city) {
-        this.cityService.addCity(city);
+    public void addCity(@RequestBody StoreCityRequestBody cityRequestBody) {
+        this.cityService.addCity(cityRequestBody);
     }
 
     @GetMapping("/city/all")
-    public List<City> getAllCities() {
-        return this.cityService.getAllCities();
+    public Page<City> getAllCities(@RequestParam("page") int page) {
+        return this.cityService.getAllCities(page);
     }
 
     @GetMapping("/city/{id}")
