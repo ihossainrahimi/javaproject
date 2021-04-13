@@ -1,13 +1,16 @@
 package com.example.demo.service;
 
-import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.dto.StoreCountryRequestBody;
 import com.example.demo.dto.UpdateCountryRequestBody;
 import com.example.demo.entity.Country;
 import com.example.demo.repository.CountryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,12 +21,15 @@ public class CountryService {
     @Autowired
     private CountryRepository countryRepository;
 
-    public void addCountry(Country country){
+    public void addCountry(StoreCountryRequestBody countryRequestBody){
+        Country country = new Country();
+        country.setName(countryRequestBody.getName());
         this.countryRepository.save(country);
     }
 
-    public List<Country> getAllCountries(){
-        return this.countryRepository.findAll();
+    public Page<Country> getAllCountries(int page){
+        Pageable pageable = PageRequest.of(page, 10);
+        return this.countryRepository.findAll(pageable);
     }
 
     public ResponseEntity<Country> findCountryById(int id){
