@@ -4,10 +4,14 @@ import java.util.List;
 import java.util.Optional;
 import com.example.demo.client.JSONHolderClient;
 import com.example.demo.client.UserClient;
+import com.example.demo.dto.StoreUserRequestBody;
 import com.example.demo.dto.UpdateUserRequestBody;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,8 +24,15 @@ public class UserService {
     @Autowired
     private JSONHolderClient holderUserClient;
 
-    public User addUser(User user) {
-        return this.userRepository.save(user);
+    public void addUser(StoreUserRequestBody userRequestBody) {
+        User user = new User();
+        user.setName(userRequestBody.getName());
+        user.setUsername(userRequestBody.getUsername());
+        user.setEmail(userRequestBody.getEmail());
+        user.setPhone(userRequestBody.getPhone());
+        user.setWebsite(userRequestBody.getWebsite());
+        user.setInfo(userRequestBody.getInfo());
+        this.userRepository.save(user);
 
     }
 
@@ -41,8 +52,9 @@ public class UserService {
         }
     }
 
-    public List<User> getAllUser() {
-        return this.userRepository.findAll();
+    public Page<User> getAllUser(int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return this.userRepository.findAll(pageable);
     }
 
     public ResponseEntity<User> findUserById(Integer id) {
