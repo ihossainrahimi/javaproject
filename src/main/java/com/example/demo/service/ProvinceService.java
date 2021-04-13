@@ -1,13 +1,16 @@
 package com.example.demo.service;
 
-import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.dto.StoreProvinceRequestBody;
 import com.example.demo.dto.UpdateProvinceRequestBody;
 import com.example.demo.entity.Province;
 import com.example.demo.repository.ProvinceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,12 +21,17 @@ public class ProvinceService {
     @Autowired
     private ProvinceRepository provinceRepository;
 
-    public void addProvince(Province province) {
+    public void addProvince(StoreProvinceRequestBody provinceRequestBody) {
+        Province province = new Province();
+
+        province.setName(provinceRequestBody.getName());
+        province.setCountryId(provinceRequestBody.getCountryId());
         this.provinceRepository.save(province);
     }
 
-    public List<Province> getAllProvinces() {
-        return this.provinceRepository.findAll();
+    public Page<Province> getAllProvinces(int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return this.provinceRepository.findAll(pageable);
     }
 
     public ResponseEntity<Province> getProvinceById(int id) {
