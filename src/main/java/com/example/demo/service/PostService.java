@@ -5,11 +5,15 @@ import java.util.Optional;
 
 import com.example.demo.client.JSONHolderClient;
 import com.example.demo.client.PostClient;
+import com.example.demo.dto.StorePostRequestBody;
 import com.example.demo.dto.UpdatePostRequestBody;
 import com.example.demo.entity.Post;
 import com.example.demo.repository.PostRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,8 +26,12 @@ public class PostService {
     @Autowired
     private JSONHolderClient holderClient;
 
-    public Post addPost(Post posts){
-       return postRepository.save(posts);
+    public void addPost(StorePostRequestBody postRequestBody){
+       Post post = new Post();
+       post.setUserId(postRequestBody.getUserId());
+       post.setTitle(postRequestBody.getTitle());
+       post.setBody(postRequestBody.getBody());
+       this.postRepository.save(post);
     }
     
     public List<PostClient> postClient() {
@@ -41,8 +49,9 @@ public class PostService {
         }
     }
 
-    public List<Post> getallPost() {
-        return this.postRepository.findAll();
+    public Page<Post> getallPost(int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return this.postRepository.findAll(pageable);
     }
 
     public ResponseEntity<Post> findPostById(Integer id) {

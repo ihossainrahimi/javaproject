@@ -3,11 +3,13 @@ package com.example.demo.controller;
 import java.util.List;
 
 import com.example.demo.client.PostClient;
+import com.example.demo.dto.StorePostRequestBody;
 import com.example.demo.dto.UpdatePostRequestBody;
 import com.example.demo.entity.Post;
 import com.example.demo.service.PostService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,12 +29,8 @@ public class PostController {
     private PostService postService;
 
     @PostMapping("/post/")
-    public Post addPost(@RequestBody Post post){
-        return this.postService.addPost(post);
-    }
-
-    public List<PostClient> postClient() {
-        return this.postService.postClient();
+    public void addPost(@RequestBody StorePostRequestBody postRequestBody) {
+        this.postService.addPost(postRequestBody);
     }
 
     @GetMapping("/post/update")
@@ -40,8 +39,8 @@ public class PostController {
     }
 
     @GetMapping("/post/all")
-    public List<Post> getallPosts() {
-        return this.postService.getallPost();
+    public Page<Post> getallPosts(@RequestParam("page") int page) {
+        return this.postService.getallPost(page);
     }
 
     @GetMapping("/post/{id}")
@@ -56,7 +55,8 @@ public class PostController {
     }
 
     @PutMapping("/post/{id}")
-    public ResponseEntity<Post> updatePost(@RequestBody UpdatePostRequestBody postRequestBody, @PathVariable Integer id) {
+    public ResponseEntity<Post> updatePost(@RequestBody UpdatePostRequestBody postRequestBody,
+            @PathVariable Integer id) {
         return this.postService.updatePost(id, postRequestBody);
     }
 

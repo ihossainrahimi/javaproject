@@ -10,7 +10,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-public class UpdateUserRequestBody {
+public class StoreUserRequestBody {
     private String name;
     private String username;
     private String email;
@@ -67,4 +67,5 @@ public class UpdateUserRequestBody {
     public void setInfo(HashMap<String, String> info) {
         this.info = info;
     }
+
 }
