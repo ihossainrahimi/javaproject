@@ -21,11 +21,11 @@ public class CityService {
     @Autowired
     private CityRepository cityRepository;
 
-    public void addCity(StoreCityRequestBody cityRequestBody) {
+    public City addCity(StoreCityRequestBody cityRequestBody) {
         City city = new City();
         city.setName(cityRequestBody.getName());
         city.setProvinceId(cityRequestBody.getProvinceId());
-        this.cityRepository.save(city);
+        return this.cityRepository.save(city);
     }
 
     public Page<City> getAllCities(int page) {

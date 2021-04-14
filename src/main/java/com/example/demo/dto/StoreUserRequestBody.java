@@ -2,22 +2,12 @@ package com.example.demo.dto;
 
 import java.util.HashMap;
 
-import javax.persistence.Column;
-
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
-
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-
-@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class StoreUserRequestBody {
     private String name;
     private String username;
     private String email;
     private String phone;
     private String website;
-    @Type(type = "jsonb")
-    @Column(columnDefinition = "hashmap")
     private HashMap<String, String> info = new HashMap<>();
 
     public String getName() {

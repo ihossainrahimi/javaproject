@@ -21,12 +21,11 @@ public class ProvinceService {
     @Autowired
     private ProvinceRepository provinceRepository;
 
-    public void addProvince(StoreProvinceRequestBody provinceRequestBody) {
+    public Province addProvince(StoreProvinceRequestBody provinceRequestBody) {
         Province province = new Province();
-
         province.setName(provinceRequestBody.getName());
         province.setCountryId(provinceRequestBody.getCountryId());
-        this.provinceRepository.save(province);
+        return this.provinceRepository.save(province);
     }
 
     public Page<Province> getAllProvinces(int page) {

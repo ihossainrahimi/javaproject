@@ -18,19 +18,22 @@ CREATE TABLE posts(
 );
 CREATE TABLE countries(
     id serial PRIMARY KEY NOT NULL,
-    name character varying(50) NOT NULL
+    name character varying(50) NOT NULL,
+    deleted boolean NOT NULL
 );
 CREATE TABLE provinces(
     id serial PRIMARY KEY NOT NULL,
     country_id INTEGER NOT NULL,
     name character varying(50) NOT NULL,
     CONSTRAINT fk_country FOREIGN KEY(country_id) REFERENCES countries(id) ON DELETE CASCADE ON UPDATE CASCADE
+    deleted boolean NOT NULL
 );
 CREATE TABLE cities(
     id serial PRIMARY KEY NOT NULL,
     province_id INTEGER NOT NULL,
     name character varying(50) NOT NULL,
     CONSTRAINT fk_province FOREIGN KEY(province_id) REFERENCES provinces(id) ON DELETE CASCADE ON UPDATE CASCADE
+    deleted boolean NOT NULL
 );
 CREATE TABLE addresses(
     id serial PRIMARY KEY NOT NULL,

@@ -21,7 +21,7 @@ public class AddressService {
     @Autowired
     private AddressRepository addressRepository;
 
-    public void addAddress(StoreAddressRequestBody addressRequestBody) {
+    public Address addAddress(StoreAddressRequestBody addressRequestBody) {
         Address address = new Address();
         address.setUserId(addressRequestBody.getUserId());
         address.setCountryId(addressRequestBody.getCountryId());
@@ -32,7 +32,7 @@ public class AddressService {
         address.setLat(addressRequestBody.getLat());
         address.setLog(addressRequestBody.getLog());
         address.setCompleteAddress(addressRequestBody.getCompleteAddress());
-        this.addressRepository.save(address);
+        return this.addressRepository.save(address);
     }
 
     public Page<Address> getAllAddress(int page) {

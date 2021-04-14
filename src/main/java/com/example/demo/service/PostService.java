@@ -9,6 +9,7 @@ import com.example.demo.dto.StorePostRequestBody;
 import com.example.demo.dto.UpdatePostRequestBody;
 import com.example.demo.entity.Post;
 import com.example.demo.repository.PostRepository;
+import com.example.demo.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,15 +26,17 @@ public class PostService {
     private PostRepository postRepository;
     @Autowired
     private JSONHolderClient holderClient;
+    @Autowired
+    private UserRepository userRepository;
 
-    public void addPost(StorePostRequestBody postRequestBody){
-       Post post = new Post();
-       post.setUserId(postRequestBody.getUserId());
-       post.setTitle(postRequestBody.getTitle());
-       post.setBody(postRequestBody.getBody());
-       this.postRepository.save(post);
+    public Post addPost(StorePostRequestBody postRequestBody) {
+        Post post = new Post();
+        post.setUserId(postRequestBody.getUserId());
+        post.setTitle(postRequestBody.getTitle());
+        post.setBody(postRequestBody.getBody());
+        return this.postRepository.save(post);
     }
-    
+
     public List<PostClient> postClient() {
         return this.holderClient.getPosts();
     }
@@ -67,7 +70,7 @@ public class PostService {
         boolean exists = postRepository.existsById(id);
         if (!exists) {
             return new ResponseEntity<>("Post  by Id " + id + " does not exist.\n" + "check your id and try again.",
-                    HttpStatus.BAD_REQUEST);
+                    HttpStatus.NOT_FOUND);
         }
 
         this.postRepository.deleteById(id);

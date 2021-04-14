@@ -19,33 +19,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/cities")
 public class CityController {
 
     @Autowired
     private CityService cityService;
 
-    @PostMapping("/city/")
-    public void addCity(@RequestBody StoreCityRequestBody cityRequestBody) {
-        this.cityService.addCity(cityRequestBody);
+    @PostMapping("/")
+    public City addCity(@RequestBody StoreCityRequestBody cityRequestBody) {
+        return this.cityService.addCity(cityRequestBody);
     }
 
-    @GetMapping("/city/all")
+    @GetMapping("/all")
     public Page<City> getAllCities(@RequestParam("page") int page) {
         return this.cityService.getAllCities(page);
     }
 
-    @GetMapping("/city/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<City> findCityById(@PathVariable int id) {
         return this.cityService.findCityById(id);
     }
 
-    @DeleteMapping("/city/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCityById(@PathVariable int id) {
         return this.cityService.deleteCityById(id);
     }
 
-    @PutMapping("/city/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<City> updateCity(@PathVariable int id, @RequestBody UpdateCityRequestBody cityRequestBody) {
         return this.cityService.updateCity(id, cityRequestBody);
     }
