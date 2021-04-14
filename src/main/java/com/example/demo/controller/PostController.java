@@ -26,7 +26,7 @@ public class PostController {
     private PostService postService;
 
     @PostMapping("/")
-    public Post addPost(@RequestBody StorePostRequestBody postRequestBody) {
+    public ResponseEntity<String> addPost(@RequestBody StorePostRequestBody postRequestBody) {
         return this.postService.addPost(postRequestBody);
     }
 

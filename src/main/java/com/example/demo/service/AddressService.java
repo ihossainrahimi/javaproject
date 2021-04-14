@@ -6,6 +6,8 @@ import com.example.demo.dto.StoreAddressRequestBody;
 import com.example.demo.dto.UpdateAddressRequestBody;
 import com.example.demo.entity.Address;
 import com.example.demo.repository.AddressRepository;
+import com.example.demo.repository.CityRepository;
+import com.example.demo.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,19 +22,30 @@ public class AddressService {
 
     @Autowired
     private AddressRepository addressRepository;
+    @Autowired
+    private CityRepository cityRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    public Address addAddress(StoreAddressRequestBody addressRequestBody) {
+    public ResponseEntity<String> addAddress(StoreAddressRequestBody addressRequestBody) {
         Address address = new Address();
+        boolean exist = this.cityRepository.existsById(addressRequestBody.getCityId());
+        if (!exist) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("CityId does not exist.");
+        }
+        exist = this.userRepository.existsById(addressRequestBody.getUserId());
+        if(!exist){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Userd does not exist.");
+        }
         address.setUserId(addressRequestBody.getUserId());
-        address.setCountryId(addressRequestBody.getCountryId());
-        address.setProvinceId(addressRequestBody.getProvinceId());
         address.setCityId(addressRequestBody.getCityId());
         address.setStreet(addressRequestBody.getStreet());
         address.setSuite(addressRequestBody.getSuite());
         address.setLat(addressRequestBody.getLat());
         address.setLog(addressRequestBody.getLog());
         address.setCompleteAddress(addressRequestBody.getCompleteAddress());
-        return this.addressRepository.save(address);
+        this.addressRepository.save(address);
+        return ResponseEntity.ok().body("Address successfully created.");
     }
 
     public Page<Address> getAllAddress(int page) {
@@ -67,8 +80,6 @@ public class AddressService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         address.get().setUserId(addressRequestBody.getUserId());
-        address.get().setCountryId(addressRequestBody.getCountryId());
-        address.get().setProvinceId(addressRequestBody.getProvinceId());
         address.get().setCityId(addressRequestBody.getCityId());
         address.get().setStreet(addressRequestBody.getStreet());
         address.get().setSuite(addressRequestBody.getSuite());

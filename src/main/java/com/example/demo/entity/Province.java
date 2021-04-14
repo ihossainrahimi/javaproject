@@ -35,9 +35,6 @@ public class Province {
     private int countryId;
     private boolean deleted;
 
-    @OneToMany(mappedBy = "province", cascade = CascadeType.ALL)
-    private Set<Address> addresses = new HashSet<>();
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore

@@ -6,6 +6,7 @@ import com.example.demo.dto.StoreCityRequestBody;
 import com.example.demo.dto.UpdateCityRequestBody;
 import com.example.demo.entity.City;
 import com.example.demo.repository.CityRepository;
+import com.example.demo.repository.ProvinceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,12 +21,19 @@ public class CityService {
 
     @Autowired
     private CityRepository cityRepository;
+    @Autowired
+    private ProvinceRepository provinceRepository;
 
-    public City addCity(StoreCityRequestBody cityRequestBody) {
+    public ResponseEntity<String> addCity(StoreCityRequestBody cityRequestBody) {
         City city = new City();
+        boolean exist = this.provinceRepository.existsById(cityRequestBody.getProvinceId());
+        if (!exist) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ProvinceId does not exist.");
+        }
         city.setName(cityRequestBody.getName());
         city.setProvinceId(cityRequestBody.getProvinceId());
-        return this.cityRepository.save(city);
+        this.cityRepository.save(city);
+        return ResponseEntity.ok().body("City successfully created.");
     }
 
     public Page<City> getAllCities(int page) {

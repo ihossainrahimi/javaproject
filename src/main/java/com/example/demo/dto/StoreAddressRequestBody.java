@@ -3,8 +3,6 @@ package com.example.demo.dto;
 public class StoreAddressRequestBody {
 
     private int userId;
-    private int countryId;
-    private int provinceId;
     private int cityId;
     private String street;
     private String suite;
@@ -18,22 +16,6 @@ public class StoreAddressRequestBody {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public int getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(int countryId) {
-        this.countryId = countryId;
-    }
-
-    public int getProvinceId() {
-        return provinceId;
-    }
-
-    public void setProvinceId(int provinceId) {
-        this.provinceId = provinceId;
     }
 
     public int getCityId() {

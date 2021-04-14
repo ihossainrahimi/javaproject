@@ -27,10 +27,6 @@ public class Address {
 
     @Column(name = "user_id")
     private int userId;
-    @Column(name = "country_id")
-    private int countryId;
-    @Column(name = "province_id")
-    private int provinceId;
     @Column(name = "city_id")
     private int cityId;
     private String street;
@@ -45,16 +41,6 @@ public class Address {
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
     private User user;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @JsonIgnore
-    private Country country;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "province_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @JsonIgnore
-    private Province province;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id", referencedColumnName = "id", insertable = false, updatable = false)
@@ -131,38 +117,6 @@ public class Address {
 
     public void setSuite(String suite) {
         this.suite = suite;
-    }
-
-    public int getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(int countryId) {
-        this.countryId = countryId;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public int getProvinceId() {
-        return provinceId;
-    }
-
-    public void setProvinceId(int provinceId) {
-        this.provinceId = provinceId;
-    }
-
-    public Province getProvince() {
-        return province;
-    }
-
-    public void setProvince(Province province) {
-        this.province = province;
     }
 
     public void setCityId(int cityId) {

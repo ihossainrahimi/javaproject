@@ -28,9 +28,6 @@ public class Country {
     private boolean deleted;
 
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
-    private Set<Address> addresses = new HashSet<>();
-
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
     private Set<Province> provinces = new HashSet<>();
 
     public int getId() {

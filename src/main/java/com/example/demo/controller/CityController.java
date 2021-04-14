@@ -26,7 +26,7 @@ public class CityController {
     private CityService cityService;
 
     @PostMapping("/")
-    public City addCity(@RequestBody StoreCityRequestBody cityRequestBody) {
+    public ResponseEntity<String> addCity(@RequestBody StoreCityRequestBody cityRequestBody) {
         return this.cityService.addCity(cityRequestBody);
     }
 

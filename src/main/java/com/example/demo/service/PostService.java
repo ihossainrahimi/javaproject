@@ -29,12 +29,18 @@ public class PostService {
     @Autowired
     private UserRepository userRepository;
 
-    public Post addPost(StorePostRequestBody postRequestBody) {
+    public ResponseEntity<String> addPost(StorePostRequestBody postRequestBody) {
         Post post = new Post();
+
+        boolean exist = userRepository.existsById(postRequestBody.getUserId());
+        if(!exist){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("UserId does not exist.");
+        }
         post.setUserId(postRequestBody.getUserId());
         post.setTitle(postRequestBody.getTitle());
         post.setBody(postRequestBody.getBody());
-        return this.postRepository.save(post);
+        this.postRepository.save(post);
+        return ResponseEntity.status(HttpStatus.OK).body("Post successfully created.");
     }
 
     public List<PostClient> postClient() {

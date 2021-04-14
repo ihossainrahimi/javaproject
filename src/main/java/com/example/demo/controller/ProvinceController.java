@@ -26,7 +26,7 @@ public class ProvinceController {
     private ProvinceService provinceService;
 
     @PostMapping("/")
-    public Province addProvince(@RequestBody StoreProvinceRequestBody provinceRequestBody) {
+    public ResponseEntity<String> addProvince(@RequestBody StoreProvinceRequestBody provinceRequestBody) {
         return this.provinceService.addProvince(provinceRequestBody);
     }
 
