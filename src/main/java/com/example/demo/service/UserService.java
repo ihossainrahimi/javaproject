@@ -24,7 +24,7 @@ public class UserService {
     @Autowired
     private JSONHolderClient holderUserClient;
 
-    public void addUser(StoreUserRequestBody userRequestBody) {
+    public User addUser(StoreUserRequestBody userRequestBody) {
         User user = new User();
         user.setName(userRequestBody.getName());
         user.setUsername(userRequestBody.getUsername());
@@ -32,7 +32,7 @@ public class UserService {
         user.setPhone(userRequestBody.getPhone());
         user.setWebsite(userRequestBody.getWebsite());
         user.setInfo(userRequestBody.getInfo());
-        this.userRepository.save(user);
+        return this.userRepository.save(user);
 
     }
 

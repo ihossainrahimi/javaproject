@@ -1,8 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
-import com.example.demo.client.PostClient;
 import com.example.demo.dto.StorePostRequestBody;
 import com.example.demo.dto.UpdatePostRequestBody;
 import com.example.demo.entity.Post;
@@ -22,39 +19,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/posts")
 public class PostController {
 
     @Autowired
     private PostService postService;
 
-    @PostMapping("/post/")
-    public void addPost(@RequestBody StorePostRequestBody postRequestBody) {
-        this.postService.addPost(postRequestBody);
+    @PostMapping("/")
+    public ResponseEntity<String> addPost(@RequestBody StorePostRequestBody postRequestBody) {
+        return this.postService.addPost(postRequestBody);
     }
 
-    @GetMapping("/post/update")
+    @GetMapping("/update")
     public void updatePostClient() {
         this.postService.updatePostClient();
     }
 
-    @GetMapping("/post/all")
+    @GetMapping("/all")
     public Page<Post> getallPosts(@RequestParam("page") int page) {
         return this.postService.getallPost(page);
     }
 
-    @GetMapping("/post/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Post> getPostById(@PathVariable Integer id) {
         return this.postService.findPostById(id);
     }
 
-    @DeleteMapping("/post/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePostById(@PathVariable Integer id) {
         return this.postService.deletePostById(id);
 
     }
 
-    @PutMapping("/post/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Post> updatePost(@RequestBody UpdatePostRequestBody postRequestBody,
             @PathVariable Integer id) {
         return this.postService.updatePost(id, postRequestBody);

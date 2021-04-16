@@ -19,33 +19,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/countries")
 public class CountryController {
 
     @Autowired
     private CountryService countryService;
 
-    @PostMapping("/country/")
-    public void addCountry(@RequestBody StoreCountryRequestBody countryRequestBody) {
-        this.countryService.addCountry(countryRequestBody);
+    @PostMapping("/")
+    public Country addCountry(@RequestBody StoreCountryRequestBody countryRequestBody) {
+        return this.countryService.addCountry(countryRequestBody);
     }
 
-    @GetMapping("/country/all")
+    @GetMapping("/all")
     public Page<Country> getAllCountries(@RequestParam("page") int page) {
         return this.countryService.getAllCountries(page);
     }
 
-    @GetMapping("/country/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Country> findCountryById(@PathVariable int id) {
         return this.countryService.findCountryById(id);
     }
 
-    @DeleteMapping("/country/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCountryById(@PathVariable int id) {
         return this.countryService.deleteCountryById(id);
     }
 
-    @PutMapping("/country/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Country> updateCountry(@PathVariable int id,
             @RequestBody UpdateCountryRequestBody countryRequestBody) {
         return this.countryService.updateCountry(id, countryRequestBody);

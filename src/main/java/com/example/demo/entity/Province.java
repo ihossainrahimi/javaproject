@@ -17,8 +17,13 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 @Table(name = "provinces")
 @Entity
+@SQLDelete(sql = "UPDATE addresses SET deleted= true WHERE id=?")
+@Where(clause = "deleted = false")
 public class Province {
 
     @Id
@@ -28,9 +33,7 @@ public class Province {
     private String name;
     @Column(name = "country_id")
     private int countryId;
-
-    @OneToMany(mappedBy = "province", cascade = CascadeType.ALL)
-    private Set<Address> addresses = new HashSet<>();
+    private boolean deleted;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", referencedColumnName = "id", insertable = false, updatable = false)
@@ -78,5 +81,13 @@ public class Province {
 
     public Set<City> getCities() {
         return cities;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

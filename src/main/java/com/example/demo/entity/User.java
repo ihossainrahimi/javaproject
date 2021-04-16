@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
@@ -36,8 +38,10 @@ public class User {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Size(min = 3, max = 20, message = "Name must be between 3 to 20.")
     private String name;
     private String username;
+    @Email(message = "Email should be valid.")
     private String email;
     private String phone;
     private String website;

@@ -19,33 +19,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/provinces")
 public class ProvinceController {
 
     @Autowired
     private ProvinceService provinceService;
 
-    @PostMapping("/province/")
-    public void addProvince(@RequestBody StoreProvinceRequestBody provinceRequestBody) {
-        this.provinceService.addProvince(provinceRequestBody);
+    @PostMapping("/")
+    public ResponseEntity<String> addProvince(@RequestBody StoreProvinceRequestBody provinceRequestBody) {
+        return this.provinceService.addProvince(provinceRequestBody);
     }
 
-    @GetMapping("/province/all")
+    @GetMapping("/all")
     public Page<Province> getAllProvinces(@RequestParam("page") int page) {
         return this.provinceService.getAllProvinces(page);
     }
 
-    @GetMapping("/province/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Province> findProvinceById(@PathVariable int id) {
         return this.provinceService.getProvinceById(id);
     }
 
-    @DeleteMapping("/province/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProvinceById(@PathVariable int id) {
         return this.provinceService.deleteProvinceById(id);
     }
 
-    @PutMapping("/province/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Province> updateProvince(@PathVariable int id,
             @RequestBody UpdateProvinceRequestBody provinceRequestBody) {
         return this.provinceService.updateProvince(id, provinceRequestBody);

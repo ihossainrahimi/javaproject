@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import javax.validation.Valid;
+
 import com.example.demo.dto.StoreUserRequestBody;
 import com.example.demo.dto.UpdateUserRequestBody;
 import com.example.demo.entity.User;
@@ -19,40 +21,40 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/user/")
-    public void addUser(@RequestBody StoreUserRequestBody userRequestBody){
-        this.userService.addUser(userRequestBody);
+    @PostMapping("/")
+    public User addUser(@RequestBody StoreUserRequestBody userRequestBody) {
+        return this.userService.addUser(userRequestBody);
     }
 
-    @GetMapping("/user/get")
+    @GetMapping("/get")
     public void updateUserclient() {
         this.userService.updateUserclient();
     }
 
-    @GetMapping("/user/all")
-    public Page<User> getalluser(@RequestParam("page") int page) {
+    @GetMapping("/all")
+    public Page<User> getalluser(@Valid @RequestParam("page") int page) {
         return userService.getAllUser(page);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Integer id) {
         return this.userService.findUserById(id);
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable Integer id) {
         return this.userService.deleteUserById(id);
     }
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/{id}")
     public void updateUser(@RequestBody UpdateUserRequestBody user, @PathVariable int id) {
         this.userService.updateUser(id, user);
     }
-    
+
 }

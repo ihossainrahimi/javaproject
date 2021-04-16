@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.example.demo.dto.StoreProvinceRequestBody;
 import com.example.demo.dto.UpdateProvinceRequestBody;
 import com.example.demo.entity.Province;
+import com.example.demo.repository.CountryRepository;
 import com.example.demo.repository.ProvinceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,19 @@ public class ProvinceService {
 
     @Autowired
     private ProvinceRepository provinceRepository;
+    @Autowired
+    private CountryRepository countryRepository;
 
-    public void addProvince(StoreProvinceRequestBody provinceRequestBody) {
+    public ResponseEntity<String> addProvince(StoreProvinceRequestBody provinceRequestBody) {
         Province province = new Province();
-
+        boolean exist = this.countryRepository.existsById(provinceRequestBody.getCountryId());
+        if (!exist) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("CountryId does not exist.");
+        }
         province.setName(provinceRequestBody.getName());
         province.setCountryId(provinceRequestBody.getCountryId());
         this.provinceRepository.save(province);
+        return ResponseEntity.ok().body("Province successfully created.");
     }
 
     public Page<Province> getAllProvinces(int page) {
