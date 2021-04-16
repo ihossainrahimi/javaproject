@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import javax.validation.Valid;
+
 import com.example.demo.dto.StoreUserRequestBody;
 import com.example.demo.dto.UpdateUserRequestBody;
 import com.example.demo.entity.User;
@@ -36,7 +38,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public Page<User> getalluser(@RequestParam("page") int page) {
+    public Page<User> getalluser(@Valid @RequestParam("page") int page) {
         return userService.getAllUser(page);
     }
 
