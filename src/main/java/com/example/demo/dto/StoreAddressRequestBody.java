@@ -1,11 +1,14 @@
 package com.example.demo.dto;
 
+import javax.validation.constraints.Size;
+
 public class StoreAddressRequestBody {
 
     private int userId;
     private int cityId;
     private String street;
     private String suite;
+    @Size(min = 10, max = 200)
     private String completeAddress;
     private float lat;
     private float log;

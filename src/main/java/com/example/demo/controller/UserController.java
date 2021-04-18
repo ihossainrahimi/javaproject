@@ -28,7 +28,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/")
-    public User addUser(@RequestBody StoreUserRequestBody userRequestBody) {
+    public User addUser(@Valid @RequestBody StoreUserRequestBody userRequestBody) {
         return this.userService.addUser(userRequestBody);
     }
 
@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public Page<User> getalluser(@Valid @RequestParam("page") int page) {
+    public Page<User> getalluser(@RequestParam("page") int page) {
         return userService.getAllUser(page);
     }
 
@@ -53,7 +53,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public void updateUser(@RequestBody UpdateUserRequestBody user, @PathVariable int id) {
+    public void updateUser(@Valid @RequestBody UpdateUserRequestBody user, @PathVariable int id) {
         this.userService.updateUser(id, user);
     }
 

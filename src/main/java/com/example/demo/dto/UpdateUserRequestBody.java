@@ -3,6 +3,9 @@ package com.example.demo.dto;
 import java.util.HashMap;
 
 import javax.persistence.Column;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
@@ -11,9 +14,13 @@ import org.hibernate.annotations.TypeDef;
 
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class UpdateUserRequestBody {
+    @Size(min = 3, max = 20, message = "Name must be between 3 to 20.")
     private String name;
+    @NotNull(message = "Username should not be null.")
     private String username;
+    @Email(message = "Email should be valid.")
     private String email;
+    @Size(min = 11, max = 11, message = "Enter valid phone number.")
     private String phone;
     private String website;
     @Type(type = "jsonb")
