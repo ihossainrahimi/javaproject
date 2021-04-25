@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import javax.validation.Valid;
+
 import com.example.demo.dto.StorePostRequestBody;
 import com.example.demo.dto.UpdatePostRequestBody;
 import com.example.demo.entity.Post;
@@ -26,7 +28,7 @@ public class PostController {
     private PostService postService;
 
     @PostMapping("/")
-    public ResponseEntity<String> addPost(@RequestBody StorePostRequestBody postRequestBody) {
+    public ResponseEntity<String> addPost(@Valid @RequestBody StorePostRequestBody postRequestBody) {
         return this.postService.addPost(postRequestBody);
     }
 
@@ -52,7 +54,7 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Post> updatePost(@RequestBody UpdatePostRequestBody postRequestBody,
+    public ResponseEntity<Post> updatePost(@Valid @RequestBody UpdatePostRequestBody postRequestBody,
             @PathVariable Integer id) {
         return this.postService.updatePost(id, postRequestBody);
     }

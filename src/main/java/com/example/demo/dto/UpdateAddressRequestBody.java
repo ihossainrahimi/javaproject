@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import javax.validation.constraints.Size;
+
 public class UpdateAddressRequestBody {
 
     private int id;
@@ -7,6 +9,7 @@ public class UpdateAddressRequestBody {
     private int cityId;
     private String street;
     private String suite;
+    @Size(min = 10, max = 200)
     private String completeAddress;
     private float lat;
     private float log;

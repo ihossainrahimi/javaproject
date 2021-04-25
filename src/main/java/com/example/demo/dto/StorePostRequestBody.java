@@ -1,8 +1,11 @@
 package com.example.demo.dto;
 
+import javax.validation.constraints.Size;
+
 public class StorePostRequestBody {
 
     private int userId;
+    @Size(min = 8)
     private String title;
     private String body;
 

@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import javax.validation.Valid;
+
 import com.example.demo.dto.StoreAddressRequestBody;
 import com.example.demo.dto.UpdateAddressRequestBody;
 import com.example.demo.entity.Address;
@@ -26,7 +28,7 @@ public class AddressController {
     private AddressService addressService;
 
     @PostMapping("/")
-    public ResponseEntity<String> addAddress(@RequestBody StoreAddressRequestBody addressRequestBody) {
+    public ResponseEntity<String> addAddress(@Valid @RequestBody StoreAddressRequestBody addressRequestBody) {
         return this.addressService.addAddress(addressRequestBody);
     }
 
@@ -46,7 +48,7 @@ public class AddressController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Address> updateAddress(@PathVariable int id,
+    public ResponseEntity<Address> updateAddress(@Valid @PathVariable int id,
             @RequestBody UpdateAddressRequestBody addressRequestBody) {
         return this.addressService.updateAddress(id, addressRequestBody);
 
